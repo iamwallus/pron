@@ -1,91 +1,108 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — Productontwerpen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Productontwerpen</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0b1d3a;
-      color: #f5f5f5;
+      background: #0d1b2a;
+      color: #e8eaf0;
+      min-height: 100vh;
     }
+
     header {
+      background: #0f2035;
       padding: 20px;
       text-align: center;
-      background: #0d2547;
+      font-weight: bold;
+      font-size: 1.2rem;
     }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
+
+    main {
+      max-width: 660px;
+      margin: 48px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
+
     .card {
-      background: #112a54;
+      background: #162338;
       border-radius: 8px;
-      padding: 15px;
+      padding: 24px 28px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: background 0.15s;
     }
+
+    .card:hover { background: #1c2d47; }
+
     .card h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      margin-bottom: 10px;
       color: #fff;
     }
+
     .card p {
-      font-size: 14px;
-      color: #cfd6e0;
+      font-size: 0.9rem;
+      color: #a8b8cc;
+      margin-bottom: 16px;
+      line-height: 1.6;
     }
-    .card a {
-      display: inline-block;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #4fc3f7;
-      text-decoration: none;
+
+    .card .link {
+      color: #4a8fe8;
+      font-size: 0.9rem;
     }
+
     footer {
       text-align: center;
-      padding: 20px;
-      font-size: 13px;
-      color: #b0b8c6;
+      padding: 40px 20px;
+      font-size: 0.8rem;
+      color: #4a5568;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Productontwerpen</h1>
-  </header>
 
-  <main class="container">
-    <section class="grid">
-      <div class="card">
-        <h2>PO9 — Studio Drift presentatie</h2>
-        <p>"Kruip in de huid van een Nederlandse ontwerper" presentatie over Studio Drift.</p>
-        <a href="projecten/po9.html" target="_blank">Bekijk project</a>
-      </div>
-    </section>
-  </main>
+<header>Productontwerpen</header>
 
- <main class="container">
-    <section class="grid">
-      <div class="card">
-        <h2>PO8 — Neurodiversiteit </h2>
-        <p>Ontwerp een ding voor iemand met autisme, adhd, dyslexie etx.</p>
-        <a href="projecten/p08.html" target="_blank">Bekijk project</a>
-      </div>
-    </section>
-  </main>
+<main>
 
-  <footer>
-    © 2025 — Yonah de Leeuwe
-  </footer>
+  <a class="card" href="projecten/po10.html">
+    <h2>PO10 — Goeikes Kletskoppen</h2>
+    <p>Analoge fotografie met ouderen via Goeikes & stadskunstenaar Daisy Roefs.</p>
+    <span class="link">Bekijk project</span>
+  </a>
+
+  <a class="card" href="projecten/po9.html">
+    <h2>PO9 — Studio Drift presentatie</h2>
+    <p>"Kruip in de huid van een Nederlandse ontwerper" presentatie over Studio Drift.</p>
+    <span class="link">Bekijk project</span>
+  </a>
+
+  <a class="card" href="projecten/p08.html">
+    <h2>PO8 — Neurodiversiteit</h2>
+    <p>Ontwerp een ding voor iemand met autisme, adhd, dyslexie etc.</p>
+    <span class="link">Bekijk project</span>
+  </a>
+
+  <a class="card" href="https://iamwallus.github.io/po/" target="_blank">
+    <h2>Oude site</h2>
+    <p>Bekijk de vorige versie van dit portfolio.</p>
+    <span class="link">Bekijk oude site</span>
+  </a>
+
+</main>
+
+<footer>© 2025 — Yonah de Leeuwe</footer>
+
 </body>
 </html>
