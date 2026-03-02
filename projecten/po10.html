@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PO10 — Goeikes Kletskoppen</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d1b2a;
+      color: #e8eaf0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0f2035;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .page-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+
+    a { color: #4a8fe8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      font-size: 0.85rem;
+      margin-bottom: 36px;
+      color: #4a8fe8;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: #5a7a99;
+      margin-bottom: 40px;
+    }
+
+    section {
+      background: #162338;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #4a8fe8;
+      margin-bottom: 14px;
+    }
+
+    p { margin-bottom: 1em; line-height: 1.7; color: #c8d4e0; }
+    p:last-child { margin-bottom: 0; }
+
+    blockquote {
+      border-left: 2px solid #2a4a6a;
+      padding-left: 20px;
+      font-style: italic;
+      color: #8aa8c8;
+      margin: 16px 0;
+      line-height: 1.7;
+    }
+
+    /* Image Viewer */
+    .viewer { margin-top: 4px; }
+
+    .viewer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e3a55;
+      padding: 10px 16px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      color: #e8eaf0;
+    }
+
+    .viewer-header:hover { background: #254a6a; }
+    .viewer-header .toggle { transition: transform 0.2s; }
+    .viewer-header.open .toggle { transform: rotate(90deg); }
+
+    .viewer-body {
+      display: none;
+      padding: 16px 0 0;
+    }
+
+    .viewer-body.open { display: block; }
+
+    .part { margin-bottom: 28px; }
+
+    .part-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #4a8fe8;
+      margin-bottom: 4px;
+    }
+
+    .part-description {
+      font-size: 0.85rem;
+      color: #7a9ab8;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+
+    .photo-grid img:hover { opacity: 0.8; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    #lightbox-close:hover { opacity: 1; }
+
+    #lightbox-nav {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    #lightbox-nav button {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      padding: 6px 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      border-radius: 4px;
+    }
+
+    #lightbox-nav button:hover { background: rgba(255,255,255,0.1); }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.8rem;
+      color: #4a5568;
+    }
+  </style>
+</head>
+<body>
+
+<header>Productontwerpen</header>
+
+<div class="page-inner">
+
+<nav><a href="../index.html">← Terug</a></nav>
+
+<h1>PO10 — Goeikes Kletskoppen</h1>
+<p class="subtitle">Productontwerpen · 2025</p>
+
+<!-- PROJECT TEXT -->
+<section>
+  <h2>Project</h2>
+  <p>In dit project moesten we foto's maken van ouderen. We leerden hoe we foto's moesten maken en hoe het dat toe konden passen als we de ouderen gingen fotograferen. Deze oudere mensen werden of gekoppeld door Goeikes of je mocht zelf iemand uitkiezen. Ik heb zelf iemand gekozen, namelijk mijn oma. De opdracht waas: foto's maken met deze ouderen. Het was een duo project. Zij moesten foto's van ons maakte met nieuwe/moderne toestellen (digitale foto's met bijvoorbeeld telefoons of iPads) en wij maakten dan foto's van hen met "oude" analoge camera's. Het was een samenwerking met de stadskunstenaar, Daisy Roefs, en Tahne Kleijn van Goeikes. De officiële naam van het project is kletskoppen: van kletsen en van de koeken. Bij de ontmoetingen werden die dus standaard uitgedeeld aan met de ouderen.</p>
+  <p>De eerste paar lessen waren we echt gefocust op hoe je foto's moest maken. Hiervoor kregen wij oefenopdrachten, waarbij wij verschillende soorten foto's moesten maken, zoals portretfoto's of foto's van de omgeving en objecten. Aan het begin ging het vooral om het bespreken over waar we alles wilden maken en wat alles voor iedereen betekent. Hiervoor hebben wij notes gebruikt en in groepjes de dingen geanalyseerd.</p>
+  <p>Tijdens het maken van de oefenfoto's heb ik wel goed geleerd hoe ik met licht en omgeving om moest gaan en ik kreeg van mijn klasgenoten ook veel handige tips. Deze heb ik goed gebruikt tijdens het maken van de eindfoto's. Een verbeterpunt voor volgende projecten is dat ik echt goed op mijn vinger moet letten (want die stond op sommige foto's) en ook op het licht, want op veel foto's was het heel donker terwijl het 12 uur in de middag was. Met de wegwerp camera worden de foto's veel donkerder. Maar de foto's van mijn oma in de tuin hebben hierdoor wel een mooie sfeer gekregen. Want het rode jasje van mijn oma valt nu beter op. Je merkt dat toeval ook een belangrijk aspect is. Normaal kan je van te voren dingen aanpassen met een digitale camera, maar dat kon nu niet. Dus je weet pas aan het einde of het goed gelukt is.</p>
+</section>
+
+<!-- BRAINSTORM -->
+<section>
+  <h2>Brainstorm</h2>
+  <div class="viewer">
+    <div class="viewer-header" onclick="toggleViewer(this)">
+      <span>Brainstorm foto's</span>
+      <span class="toggle">›</span>
+    </div>
+    <div class="viewer-body">
+      <div class="photo-grid" data-folder="brainstorm"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEST FOTOS -->
+<section>
+  <h2>Test fotos</h2>
+  <div class="viewer">
+    <div class="viewer-header" onclick="toggleViewer(this)">
+      <span>Test foto's</span>
+      <span class="toggle">›</span>
+    </div>
+    <div class="viewer-body">
+
+      <div class="part">
+        <div class="part-title">Deel 1</div>
+        <div class="part-description">Oogcontact of juist niet — het verschil in gevoel tussen foto's waarbij de persoon de lens inloopt en foto's waarbij dat niet het geval is.</div>
+        <div class="photo-grid" data-folder="testfotos/deel1"></div>
+      </div>
+
+      <div class="part">
+        <div class="part-title">Deel 2</div>
+        <div class="part-description">Licht — experimenteren met natuurlijk licht, schaduw en belichting om sfeer en diepte in een foto te creëren.</div>
+        <div class="photo-grid" data-folder="testfotos/deel2"></div>
+      </div>
+
+      <div class="part">
+        <div class="part-title">Deel 3</div>
+        <div class="part-description">Context — hoe de achtergrond en omgeving het verhaal van een foto beïnvloeden en de persoon meer betekenis geven.</div>
+        <div class="photo-grid" data-folder="testfotos/deel3"></div>
+      </div>
+
+      <div class="part">
+        <div class="part-title">Deel 4</div>
+        <div class="part-description">Omgeving — de ruimte rondom een persoon gebruiken als onderdeel van de compositie en het verhaal.</div>
+        <div class="photo-grid" data-folder="testfotos/deel4"></div>
+      </div>
+
+      <div class="part">
+        <div class="part-title">Deel 5</div>
+        <div class="part-description">Laptop/object — een object als middelpunt gebruiken om iets over de persoon te vertellen, zonder dat de persoon zelf centraal staat.</div>
+        <div class="photo-grid" data-folder="testfotos/deel5"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SAMENWERKING -->
+<section>
+  <h2>Samenwerking</h2>
+  <p>Ik heb voor het project mijn oma gekozen. Dit heb ik gedaan, omdat ik mijn oma heel interessant vind. Ze doet namelijk veel vrijwilligerswerk en ze heeft een grote tuin waar ze graag in werkt. Dit vrijwilligerswerk doet ze al vanaf een jonge leeftijd en omdat ze dit doet heeft ze in 2018 een koninklijk lintje gekregen. Ze doet dit, omdat ze vindt dat ze iets terug moet geven aan de mensen die het niet zo makkelijk hebben. In het begin liep het project niet heel soepel, omdat ik het niet goed uitgelegd had aan haar. Dit was een beetje stressvol voor haar, want ze kreeg allerlei e-mails van Tahne Kleijn en Daisy Roefs, die ze niet snapte. Dit heb ik toen iets beter uitgelegd. Later op de middag had ze ook nog de ontmoetings bijeenkomst waar het allemaal goed werd uitgelegd. Toen ze inmiddels al wat meer wist over het project, vond ze het een heel leuk project en was ze er heel enthousiast over. Wij hebben toen de laatste weken afspraken gemaakt om deze foto's te maken. Wij zijn toen in een paar dagen tijd naar verschillende plaatsen geweest, zoals Read To Grow (dit is de plek waar mijn oma vrijwilligerswerk doet) en haar tuin. Hier heb ik foto's van gemaakt van haar hobby's. Met suggesties van haar en familieleden heb ik bepaalde dingen in deze foto's laten zien. Ik probeer met deze foto's te zeggen, dat ik het knap vind dat ze zelfs op 82-jarige leeftijd dit allemaal nog kan en dat ze ook nog zulk vrijwilligerswerk doet, want er zijn over het algemeen niet veel mensen die dit doen en vooral niet mensen die ook zo oud als haar zijn.</p>
+  <p>Ik heb ook mijn oma gevraagd om een reflectie van het project te schrijven. Hieronder is het antwoord van mijn oma:</p>
+  <blockquote>
+    "Het was een bijzonder leuk en leerzaam project om samen met mijn kleinzoon Yonah een foto-shoot te maken. Hij als jongere met een "ouderwetse" analoge camera, en ik met een moderne telefoon. Dat was erg leuk, Yonah stak mij met zijn enthousiasme direct aan, hij moest mij fotograferen in het doen van mijn hobby's, zelf zocht hij de plekken op; tuinieren in mijn tuin, boeken sorteren bij de stichting "read to grow" in Boekel en met een accordeon over mijn vader "Addy Kleijngeld." Ik moest Yonah fotograferen in de sportschool, bij het koken (cake bakken) en natuurlijk met zijn telefoon!!! Gelukkig wist hij mij ook wel te helpen hoe dat op de telefoon werkte, geduldig moest hij mij soms wel 3x iets herhalen, maar dat kon hij goed en duidelijk, we hebben samen veel plezier gehad……"
+  </blockquote>
+</section>
+
+<!-- EINDFOTO'S -->
+<section>
+  <h2>Eindfoto's</h2>
+  <div class="viewer">
+    <div class="viewer-header" onclick="toggleViewer(this)">
+      <span>Eindfoto's</span>
+      <span class="toggle">›</span>
+    </div>
+    <div class="viewer-body">
+      <div class="photo-grid" data-folder="eindfotos"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MIJN ERVARING -->
+<section>
+  <h2>Mijn ervaring</h2>
+  <p>Ik vond het een leuke en leerzame ervaring en ik vond het vooral leuk om samen met mijn oma de foto's te maken. Hierdoor heb ik geleerd hoe ik goede foto's kan maken met analoge camera's en hoe ik hiermee iemand goed in beeld kan brengen. Over het algemeen vond ik het proces heel soepel verlopen en ik vond dat de samenwerking ook goed is gegaan. Verder heb ik ook geleerd dat licht echt heel essentieel is voor deze camera. En ook dat toeval bij deze wegwerp camera een rol speelt, omdat je het niet aan kan passen terwijl je een foto maakt. En dat kan wel als je een foto maakt op je telefoon. Verder zitten er hele mooie foto's tussen, wat ik niet verwacht had en ik ben dus daar zeer blij mee.</p>
+</section>
+
+</div><!-- /page-inner -->
+
+<footer>© 2025 — Yonah de Leeuwe</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightboxOutside(event)">
+  <span id="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-nav">
+    <button onclick="lightboxNav(-1)">← vorige</button>
+    <button onclick="lightboxNav(1)">volgende →</button>
+  </div>
+</div>
+
+<script>
+  // Auto-fill all photo grids — preloads images, only adds to DOM if they load
+  function loadGrid(grid) {
+    const folder = grid.dataset.folder;
+    for (let i = 1; i <= 20; i++) {
+      const preloader = new Image();
+      preloader.src = `${folder}/${i}.jpg`;
+      preloader.onload = () => {
+        const img = document.createElement('img');
+        img.src = preloader.src;
+        img.style.width = '100%';
+        img.style.aspectRatio = '1';
+        img.style.objectFit = 'cover';
+        img.style.cursor = 'pointer';
+        img.style.borderRadius = '4px';
+        img.style.transition = 'opacity 0.2s';
+        img.onmouseover = () => img.style.opacity = '0.8';
+        img.onmouseout = () => img.style.opacity = '1';
+        img.onclick = () => openLightbox(img);
+        grid.appendChild(img);
+      };
+      // onerror: do nothing — image simply never gets added
+    }
+  }
+
+  document.querySelectorAll('.photo-grid[data-folder]').forEach(loadGrid);
+
+  function toggleViewer(header) {
+    header.classList.toggle('open');
+    header.nextElementSibling.classList.toggle('open');
+  }
+
+  let currentImgs = [];
+  let currentIdx = 0;
+
+  function openLightbox(img) {
+    const grid = img.closest('.photo-grid');
+    currentImgs = Array.from(grid.querySelectorAll('img'));
+    currentIdx = currentImgs.indexOf(img);
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+
+  function lightboxNav(dir) {
+    currentImgs = Array.from(document.getElementById('lightbox-img').closest('#lightbox') ? currentImgs : currentImgs);
+    currentIdx = (currentIdx + dir + currentImgs.length) % currentImgs.length;
+    document.getElementById('lightbox-img').src = currentImgs[currentIdx].src;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  });
+</script>
+</body>
+</html>
